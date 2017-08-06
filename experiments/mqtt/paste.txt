@@ -1,0 +1,10 @@
+MQTT.client:publish("/esp/a0:20:a6:04:01:c8/boot","boot()",0,0)
+ws2812.init() 
+do local l=file.list() local s={} for k,v in pairs(l) do s[#s+1]=("%s %d\n"):format(k,v) end return table.concat(s,"\n") end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(10,0,0,0) ws2812.write(B) end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(0,10,0,0) ws2812.write(B) end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(0,0,10,0) ws2812.write(B) end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(0,0,0,10) ws2812.write(B) end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(15,15,15,15) ws2812.write(B) end
+do ws2812.init() local B=ws2812.newBuffer(300,4) B:fill(0,0,0,64) ws2812.write(B) end
+dofile"chaseonce.lua"

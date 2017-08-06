@@ -1,0 +1,4 @@
+local M={}
+M.mqtthost="151.216.22.121"
+M.wifiap="blup-un"
+return M

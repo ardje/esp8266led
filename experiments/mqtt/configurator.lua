@@ -46,7 +46,7 @@ local function boot_cb(topic,data,packet_id,dup,qos,retained)
 	print("retained",retained)
 	print(pcall(f))
 end
-assert(aclient:connect("192.168.0.9",1883))
+assert(aclient:connect("151.216.22.121",1883))
 assert(aclient:subscribe("/esp/+/boot",1,boot_cb))
 assert(aclient:subscribe("/esp/+/+",1,generic_cb))
 --send("a0:20:a6:04:01:c8","node.restart()")

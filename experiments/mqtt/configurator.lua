@@ -49,6 +49,6 @@ end
 assert(aclient:connect("192.168.0.9",1883))
 assert(aclient:subscribe("/esp/+/boot",1,boot_cb))
 assert(aclient:subscribe("/esp/+/+",1,generic_cb))
-send("a0:20:a6:04:01:c8","node.restart()")
+--send("a0:20:a6:04:01:c8","node.restart()")
 aclient:message_loop()
 

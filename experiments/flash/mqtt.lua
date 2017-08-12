@@ -27,6 +27,7 @@ topicaction[sname]=function(_,topic,data)
 	end
 end
 client:on("message",function(c,t,d)
+	print"message"
 	if topicaction[t] ~= nil then
 		return topicaction[t](c,t,d)
 	else
@@ -34,13 +35,14 @@ client:on("message",function(c,t,d)
 	end
 end)
 client:on("connect",function(c)
+	print"connected"
 	c:subscribe(sname,1)
 	pcall(client.publish,client,bname,"boot()",0,0)
 	pcall(client.lwt,client,bname,"offline()",0,0)
 end)
 wifi.sta.eventMonReg(wifi.STA_GOTIP, function()
+	print("do connect")
 	client:connect(config.mqtthost,1883,0,1)
 end)
-wifi.sta.eventMonStart()
 MQTT=m
 

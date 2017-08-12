@@ -1,0 +1,13 @@
+local M={}
+-- This is the same file as on the esp. We ignore wifiap though 
+M.mqtthost="151.216.22.121"
+M.wifiap="blup-un"
+M.wifipass=""
+M.esp={
+	a020a6040376={
+		boot=function(self)
+			self:send[[dofile"softon.lua"]]
+		end
+	}
+}
+return M

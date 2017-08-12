@@ -1,4 +1,5 @@
 local esp={}
+local config=require"config"
 local Esp={_meta={__index=esp},_list={}}
 function Esp:fromtopic(topic)
 	local id=topic:match"/esp/([^/]+)/"
@@ -10,6 +11,15 @@ function Esp:new(n)
 	print("create esp:",n)
 	self._list = self._list or {}
 	local o={_id=n}
+	local cid=n:gsub("(:)",{[":"]=""})
+	print("cid:",cid)
+	local cesp=(config.esp or {})[cid]
+	if cesp then
+		o._cesp=cesp
+		if type(o._cesp.boot)=="function" then
+			o.boot=o._cesp.boot
+		end
+	end
 	setmetatable(o,Esp._meta)
 	self._list[n]=o
 	return o

@@ -1,3 +1,4 @@
+local arg=...
 ws2812.init()
 local frame = ws2812.newBuffer(300, 4)
 local function chaser(speed,color)
@@ -17,11 +18,11 @@ local function chaser(speed,color)
 	return buffer
 end
 local timer=tmr.create()
-chaser(30,{255,0,0,0})
-chaser(25,{0,255,0,0})
-chaser(20,{0,0,255,0})
-chaser(100,{0,0,0,255})
-timer:alarm(50,tmr.ALARM_AUTO,function()
+chaser(arg.gi or 30,{255,0,0,0})
+chaser(arg.ri or 25,{0,255,0,0})
+chaser(arg.bi or 20,{0,0,255,0})
+chaser(arg.wi or 50,{0,0,0,255})
+timer:alarm(arg.ui or 50,tmr.ALARM_AUTO,function()
 	frame:fade(2)
 	ws2812.write(frame)
 end)

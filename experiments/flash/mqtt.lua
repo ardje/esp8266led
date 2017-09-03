@@ -40,9 +40,17 @@ client:on("connect",function(c)
 	pcall(client.publish,client,bname,"boot()",0,0)
 	pcall(client.lwt,client,bname,"offline()",0,0)
 end)
-wifi.sta.eventMonReg(wifi.STA_GOTIP, function()
+local function cb_doconnect()
 	print("do connect")
-	client:connect(config.mqtthost,1883,0,1)
+	client:connect(config.mqtthost,1883,0)
+end
+client:on("offline",function()
+	tmr.create():alarm(10*1000,tmr.ALARM_SINGLE,cb_connect)
 end)
+if wifi.sta.eventMonReg then
+	wifi.sta.eventMonReg(wifi.STA_GOTIP,cb_doconnect)
+else
+	wifi.eventmon.register(wifi.eventmon.STA_GOT_IP,cb_doconnect)
+end
 MQTT=m
 

@@ -1,5 +1,5 @@
 local M={}
 M.mqtthost="151.216.22.121"
 M.wifi={ssid="blup-un",
-pwd="", auto=yes}
+pwd="", auto=true}
 return M
